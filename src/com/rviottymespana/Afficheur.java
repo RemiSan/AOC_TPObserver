@@ -1,8 +1,10 @@
 package com.rviottymespana;
 
+import java.util.concurrent.Future;
+
 public class Afficheur implements ObserverDeCapteur {
     @Override
-    public void update(Capteur subject) {
-
+    public Future<?> update(Capteur subject) {
+        return null;
     }
 }
