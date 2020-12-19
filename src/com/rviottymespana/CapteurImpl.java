@@ -19,6 +19,11 @@ public class CapteurImpl implements Capteur{
     }
 
     @Override
+    public void lock() {
+
+    }
+
+    @Override
     public void attach(Observer o) {
 
     }
