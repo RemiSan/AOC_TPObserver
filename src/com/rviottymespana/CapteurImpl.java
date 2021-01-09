@@ -7,7 +7,7 @@ public class CapteurImpl implements Capteur{
 
     AlgoDiffusion algo;
     Integer value;
-    List<ObserverDeCapteur> observerDeCapteurs = new ArrayList<>();
+    List<ObserverDeCapteurAsync> observerDeCapteurs = new ArrayList<>();
 
     public CapteurImpl(AlgoDiffusion algo) {
         this.algo = algo;
@@ -15,7 +15,7 @@ public class CapteurImpl implements Capteur{
     }
 
     @Override
-    public Integer getValue(ObserverDeCapteur observerDeCapteur) {
+    public Integer getValue(ObserverDeCapteurAsync observerDeCapteurAsync) {
         algo.valueRead(this);
         return value;
     }
@@ -38,12 +38,12 @@ public class CapteurImpl implements Capteur{
     }
 
     @Override
-    public void attach(ObserverDeCapteur o) {
+    public void attach(ObserverDeCapteurAsync o) {
         observerDeCapteurs.add(o);
     }
 
     @Override
-    public void detach(ObserverDeCapteur o) {
+    public void detach(ObserverDeCapteurAsync o) {
         observerDeCapteurs.remove(o);
     }
 }

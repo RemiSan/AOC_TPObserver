@@ -1,10 +1,10 @@
 package com.rviottymespana;
 
 public interface Capteur {
-    Integer getValue(ObserverDeCapteur observerDeCapteur);
+    Integer getValue(ObserverDeCapteurAsync observerDeCapteurAsync);
     void tick();
     void lock();
     void unlock();
-    void attach(ObserverDeCapteur o);
-    void detach(ObserverDeCapteur o);
+    void attach(ObserverDeCapteurAsync o);
+    void detach(ObserverDeCapteurAsync o);
 }

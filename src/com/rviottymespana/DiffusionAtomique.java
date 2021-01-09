@@ -5,7 +5,7 @@ import java.util.List;
 public class DiffusionAtomique implements AlgoDiffusion{
 
     Capteur capteur;
-    List<ObserverDeCapteur> canalList;
+    List<ObserverDeCapteurAsync> canalList;
     Integer canalDone;
 
     public DiffusionAtomique() {
@@ -20,7 +20,7 @@ public class DiffusionAtomique implements AlgoDiffusion{
     public void execute() {
         capteur.lock();
         canalDone = 0;
-        for (ObserverDeCapteur canal : canalList){
+        for (ObserverDeCapteurAsync canal : canalList){
             canal.update(capteur);
         }
     }

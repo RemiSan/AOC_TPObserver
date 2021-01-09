@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 //sera public class Canal implements ObserverDeCapteurAsync, CapteurAsync{
 //joue le role de proxy entre afficheur et capteur, en ralentissant la diffusion des messages
-public class Canal implements ObserverDeCapteur, Capteur{
+public class Canal implements ObserverDeCapteurAsync, CapteurAsync{
 
     ScheduledExecutorService scheduler;
     ObserverDeCapteur afficheur;
@@ -22,12 +22,12 @@ public class Canal implements ObserverDeCapteur, Capteur{
     @Override
     public Future<?> update(Capteur subject) {
         this.subject = subject;
-        return scheduler.schedule(() -> afficheur.update(subject),(int)(Math.random() * 2000), TimeUnit.MILLISECONDS);
+        return scheduler.schedule(() -> afficheur.update(this),(int)(Math.random() * 2000), TimeUnit.MILLISECONDS);
     }
 
     @Override
-    public Integer getValue(ObserverDeCapteur observerDeCapteur) {
-        return this.subject.getValue(this);
+    public Future<Integer> getValue() {
+        return scheduler.schedule(() -> this.subject.getValue(this),(int)(Math.random() * 2000), TimeUnit.MILLISECONDS);
     }
 
     // doit être appelé par un ScheduleExecutorService
