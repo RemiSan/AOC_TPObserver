@@ -5,46 +5,53 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 //sera public class Canal implements ObserverDeCapteurAsync, CapteurAsync{
+//joue le role de proxy entre afficheur et capteur, en ralentissant la diffusion des messages
 public class Canal implements ObserverDeCapteur, Capteur{
 
     ScheduledExecutorService scheduler;
-    Afficheur afficheur;
+    ObserverDeCapteur afficheur;
+    Capteur subject;
 
     public Canal(ScheduledExecutorService scheduler, Afficheur afficheur) {
         this.scheduler = scheduler;
-        this.afficheur = afficheur;
+        attach(afficheur);
     }
 
 
 
     @Override
     public Future<?> update(Capteur subject) {
-        return scheduler.schedule(() -> afficheur.update(subject),1, TimeUnit.SECONDS);
+        this.subject = subject;
+        return scheduler.schedule(() -> afficheur.update(subject),(int)(Math.random() * 2000), TimeUnit.MILLISECONDS);
     }
 
     @Override
-    public Integer getValue() {
-        return null;
+    public Integer getValue(ObserverDeCapteur observerDeCapteur) {
+        return this.subject.getValue(this);
     }
 
     // doit être appelé par un ScheduleExecutorService
     @Override
     public void tick() {
-
     }
 
     @Override
     public void lock() {
-
+        // empeche de modifier la valeur
     }
 
     @Override
-    public void attach(Observer o) {
-
+    public void unlock() {
+        // lance l'incrémentation
     }
 
     @Override
-    public void detach(Observer o) {
+    public void attach(ObserverDeCapteur o) {
+        afficheur = o;
+    }
+
+    @Override
+    public void detach(ObserverDeCapteur o) {
 
     }
 }

@@ -7,9 +7,20 @@ public class App {
 
     public static void main(String[] args) {
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(2);
-        Capteur capteur;
-        AlgoDiffusion strategy;
-        Canal c1,c2,c3,c4;
-        Afficheur a1,a2,a3,a4;
+        AlgoDiffusion algoDiffusion = new DiffusionAtomique();
+        Capteur capteur = new CapteurImpl(algoDiffusion);
+        Afficheur   a1 = new Afficheur(),
+                    a2 = new Afficheur(),
+                    a3 = new Afficheur(),
+                    a4 = new Afficheur();
+        Canal   c1 = new Canal(scheduledExecutorService, a1),
+                c2 = new Canal(scheduledExecutorService, a2),
+                c3 = new Canal(scheduledExecutorService, a3),
+                c4 = new Canal(scheduledExecutorService, a4);
+        capteur.attach(c1);
+        capteur.attach(c2);
+        capteur.attach(c3);
+        capteur.attach(c4);
+        capteur.unlock();
     }
 }

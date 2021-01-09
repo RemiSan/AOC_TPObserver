@@ -1,4 +1,8 @@
 package com.rviottymespana;
 
-public interface ObserverDeCapteur extends Observer<Capteur> {
+import java.util.concurrent.Future;
+
+public interface ObserverDeCapteur {
+    Future<?> update(Capteur capteur);
+
 }
