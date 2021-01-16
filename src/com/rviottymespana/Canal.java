@@ -22,7 +22,8 @@ public class Canal implements ObserverDeCapteurAsync, CapteurAsync{
     @Override
     public Future<?> update(Capteur subject) {
         this.subject = subject;
-        return scheduler.schedule(() -> afficheur.update(this),(int)(Math.random() * 2000), TimeUnit.MILLISECONDS);
+        int i = (int)(Math.random() * 2000);
+        return scheduler.schedule(() -> afficheur.update(this),i, TimeUnit.MILLISECONDS);
     }
 
     @Override

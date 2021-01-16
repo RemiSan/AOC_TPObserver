@@ -1,7 +1,7 @@
 package com.rviottymespana;
 
 public interface AlgoDiffusion{
-    void configure(Capteur capteur);
+    void configure(CapteurImpl capteur);
     void execute();
-    void valueRead(Capteur capteur);
+    void valueRead(CapteurImpl capteur);
 }

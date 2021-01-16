@@ -1,18 +1,15 @@
 package com.rviottymespana;
 
-import java.util.List;
-
 public class DiffusionAtomique implements AlgoDiffusion{
 
-    Capteur capteur;
-    List<ObserverDeCapteurAsync> canalList;
+    CapteurImpl capteur;
     Integer canalDone;
 
     public DiffusionAtomique() {
     }
 
     @Override
-    public void configure(Capteur capteur) {
+    public void configure(CapteurImpl capteur) {
         this.capteur = capteur;
     }
 
@@ -20,15 +17,15 @@ public class DiffusionAtomique implements AlgoDiffusion{
     public void execute() {
         capteur.lock();
         canalDone = 0;
-        for (ObserverDeCapteurAsync canal : canalList){
+        for (ObserverDeCapteurAsync canal : capteur.getObserverDeCapteurs()){
             canal.update(capteur);
         }
     }
 
     @Override
-    public void valueRead(Capteur capteur) {
+    public void valueRead(CapteurImpl capteur) {
         canalDone++;
-        if (canalDone == canalList.size()) {
+        if (canalDone == capteur.getObserverDeCapteurs().size()) {
             capteur.unlock();
         }
     }
