@@ -14,6 +14,8 @@ public class CapteurImpl implements Capteur{
     private Integer value;
     private final List<ObserverDeCapteurAsync> observerDeCapteurAsyncList = new ArrayList<>();
     private final ScheduledExecutorService executor;
+    private boolean locked;
+
     private final TimerTask repeatedTask = new TimerTask() {
         public void run() {
             tick();
@@ -25,6 +27,8 @@ public class CapteurImpl implements Capteur{
         this.algo = algo;
         this.algo.configure(this);
         this.executor = Executors.newSingleThreadScheduledExecutor();
+        this.locked = false;
+        this.executor.scheduleAtFixedRate(repeatedTask, 1000L, 1000L, TimeUnit.MILLISECONDS);
     }
 
     public List<ObserverDeCapteurAsync> getObserverDeCapteurs(){
@@ -39,19 +43,21 @@ public class CapteurImpl implements Capteur{
 
     @Override
     public void tick() {
-        value++;
-        algo.execute();
+        if (!locked) {
+            value++;
+            algo.execute();
+        }
     }
 
     @Override
     public void lock() {
-        this.executor.shutdown();
+        this.locked = true;
     }
 
 
     @Override
     public void unlock() {
-        this.executor.scheduleAtFixedRate(repeatedTask, 1000L, 1000L, TimeUnit.MILLISECONDS);
+        this.locked = false;
     }
 
     @Override
