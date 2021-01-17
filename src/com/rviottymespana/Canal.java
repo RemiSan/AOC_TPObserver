@@ -22,13 +22,14 @@ public class Canal implements ObserverDeCapteurAsync, CapteurAsync{
     @Override
     public Future<?> update(Capteur subject) {
         this.subject = subject;
-        int i = (int)(Math.random() * 2000);
-        return scheduler.schedule(() -> afficheur.update(this),i, TimeUnit.MILLISECONDS);
+        Update update = new Update(afficheur, this);
+        return scheduler.schedule(update, (int)(Math.random() * 2000), TimeUnit.MILLISECONDS);
     }
 
     @Override
     public Future<Integer> getValue() {
-        return scheduler.schedule(() -> this.subject.getValue(this),(int)(Math.random() * 2000), TimeUnit.MILLISECONDS);
+        GetValue getValue = new GetValue(this.subject, this);
+        return scheduler.schedule(getValue, (int)(Math.random() * 2000), TimeUnit.MILLISECONDS);
     }
 
     // doit être appelé par un ScheduleExecutorService

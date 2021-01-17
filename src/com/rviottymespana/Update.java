@@ -1,17 +1,20 @@
 package com.rviottymespana;
 
-public class Update implements MethodInvocation {
+import java.util.concurrent.Callable;
 
-    Afficheur afficheur;
+public class Update implements Callable<Void> {
+
+    ObserverDeCapteur afficheur;
     CapteurAsync capteurAsync;
 
-    public Update(Afficheur afficheur, CapteurAsync capteurAsync) {
+    public Update(ObserverDeCapteur afficheur, CapteurAsync capteurAsync) {
         this.afficheur = afficheur;
         this.capteurAsync = capteurAsync;
     }
 
     @Override
-    public void call() {
+    public Void call() {
         this.afficheur.update(capteurAsync);
+        return null;
     }
 }
