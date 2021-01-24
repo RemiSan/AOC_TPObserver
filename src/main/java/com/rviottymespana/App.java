@@ -1,11 +1,14 @@
 package com.rviottymespana;
 
+import org.apache.log4j.BasicConfigurator;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 public class App {
 
     public static void main(String[] args) {
+        BasicConfigurator.configure();
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(2);
         AlgoDiffusion algoDiffusion = new DiffusionAtomique();
         Capteur capteur = new CapteurImpl(algoDiffusion);

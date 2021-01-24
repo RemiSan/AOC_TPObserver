@@ -12,7 +12,7 @@ public class CapteurImpl implements Capteur{
 
     private final AlgoDiffusion algo;
     private Integer value;
-    private final List<ObserverDeCapteurAsync> observerDeCapteurAsyncList = new ArrayList<>();
+    private final List<ObserverDeCapteurAsync> observerDeCapteurAsyncList = new ArrayList<ObserverDeCapteurAsync>();
     private final ScheduledExecutorService executor;
     private boolean locked;
 
