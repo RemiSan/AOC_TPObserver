@@ -13,12 +13,10 @@ public class Afficheur implements ObserverDeCapteur {
 
     @Override
     public void update(CapteurAsync subject) {
-        try {
-            logger.info("Valeur reçue {}", subject.getValue().get());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+       subject.getValue(this);
+    }
+
+    public void getUpdated(Integer updatedValue){
+        logger.info("Valeur reçue {}", updatedValue);
     }
 }
