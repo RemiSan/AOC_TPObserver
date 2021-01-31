@@ -11,6 +11,7 @@ public class App {
         BasicConfigurator.configure();
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(2);
         AlgoDiffusion algoDiffusion = new DiffusionAtomique();
+        //AlgoDiffusion algoDiffusion = new DiffusionSequentielle();
         Capteur capteur = new CapteurImpl(algoDiffusion);
         Afficheur   a1 = new Afficheur(),
                     a2 = new Afficheur(),

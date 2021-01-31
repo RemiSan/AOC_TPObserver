@@ -69,4 +69,14 @@ public class CapteurImpl implements Capteur{
     public void detach(ObserverDeCapteurAsync o) {
         observerDeCapteurAsyncList.remove(o);
     }
+
+    @Override
+    public Capteur clone() {
+        try {
+            return (Capteur) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
