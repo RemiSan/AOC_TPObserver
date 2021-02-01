@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 public class CapteurImpl implements Capteur{
 
 
-    private final AlgoDiffusion algo;
+    private AlgoDiffusion algo;
     private Integer value;
     private final List<ObserverDeCapteurAsync> observerDeCapteurAsyncList = new ArrayList<ObserverDeCapteurAsync>();
     private final ScheduledExecutorService executor;
@@ -22,10 +22,8 @@ public class CapteurImpl implements Capteur{
         }
     };
 
-    public CapteurImpl(AlgoDiffusion algo) {
+    public CapteurImpl() {
         this.value = 0;
-        this.algo = algo;
-        this.algo.configure(this);
         this.executor = Executors.newSingleThreadScheduledExecutor();
         this.locked = false;
         this.executor.scheduleAtFixedRate(repeatedTask, 1000L, 1000L, TimeUnit.MILLISECONDS);
@@ -42,9 +40,15 @@ public class CapteurImpl implements Capteur{
     }
 
     @Override
+    public void configure(AlgoDiffusion algoDiffusion) {
+        this.algo = algoDiffusion;
+        this.algo.configure(this);
+    }
+
+    @Override
     public void tick() {
         if (!locked) {
-            value++;
+            value = CapteurUtils.calculateNextValue(value);
             algo.execute();
         }
     }
