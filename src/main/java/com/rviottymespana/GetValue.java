@@ -1,8 +1,10 @@
 package com.rviottymespana;
 
+import com.rviottymespana.models.StampedValue;
+
 import java.util.concurrent.Callable;
 
-public class GetValue implements Callable<Integer> {
+public class GetValue implements Callable<StampedValue> {
 
     private Capteur capteur;
     private ObserverDeCapteurAsync observerDeCapteurAsync;
@@ -13,7 +15,7 @@ public class GetValue implements Callable<Integer> {
     }
 
     @Override
-    public Integer call() {
+    public StampedValue call() {
         return this.capteur.getValue(this.observerDeCapteurAsync);
     }
 }

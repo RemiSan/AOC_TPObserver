@@ -5,6 +5,6 @@ public class CapteurUtils {
         return currentValue + 1;
     }
     public static boolean isBefore(Integer value1, Integer value2) {
-        return value1 < value2;
+        return value1 <= value2;
     }
 }

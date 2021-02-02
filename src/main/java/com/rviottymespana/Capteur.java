@@ -1,7 +1,9 @@
 package com.rviottymespana;
 
+import com.rviottymespana.models.StampedValue;
+
 public interface Capteur extends Cloneable{
-    Integer getValue(ObserverDeCapteurAsync observerDeCapteurAsync);
+    StampedValue getValue(ObserverDeCapteurAsync observerDeCapteurAsync);
     void configure(AlgoDiffusion algoDiffusion);
     void tick();
     void lock();

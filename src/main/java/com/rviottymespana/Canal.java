@@ -1,5 +1,7 @@
 package com.rviottymespana;
 
+import com.rviottymespana.models.StampedValue;
+
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -23,7 +25,7 @@ public class Canal implements ObserverDeCapteurAsync, CapteurAsync{
     }
 
     @Override
-    public Future<Integer> getValue() {
+    public Future<StampedValue> getValue() {
         GetValue getValue = new GetValue(this.subject, this);
         return scheduler.schedule(getValue, (int)(Math.random() * 2000), TimeUnit.MILLISECONDS);
     }

@@ -3,6 +3,7 @@ package com.rviottymespana;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
@@ -23,10 +24,11 @@ public class Tests {
     private Capteur capteur;
     private List<Afficheur> afficheurList;
     private ScheduledExecutorService scheduledExecutorService;
+    private Logger logger;
 
     @Before
     public void setupFourAfficheurOnOneCapteur() {
-        Logger logger = (Logger) LoggerFactory.getLogger(LOGGER_NAME);
+        logger = (Logger) LoggerFactory.getLogger(LOGGER_NAME);
         memoryAppender = new MemoryAppender();
         memoryAppender.setContext((LoggerContext) LoggerFactory.getILoggerFactory());
         logger.setLevel(Level.INFO);
@@ -42,6 +44,12 @@ public class Tests {
         canalList.forEach(canal -> capteur.attach(canal));
     }
 
+    @After
+    public void shutdownExecutor() throws InterruptedException {
+        scheduledExecutorService.shutdown();
+        Thread.sleep(3000);
+    }
+
     @Test
     public void testDiffusionAtomique() throws InterruptedException {
         capteur.configure(new DiffusionAtomique());
@@ -53,7 +61,6 @@ public class Tests {
                 assertThat(CapteurUtils.calculateNextValue(displayedValues.get(i))).isEqualTo(displayedValues.get(i + 1));
             }
         });
-        scheduledExecutorService.shutdown();
     }
 
     @Test
@@ -67,7 +74,6 @@ public class Tests {
                 assertThat(CapteurUtils.isBefore(displayedValues.get(i), displayedValues.get(i + 1))).isTrue();
             }
         });
-        scheduledExecutorService.shutdown();
     }
 
     @Test
@@ -97,6 +103,5 @@ public class Tests {
                 biggestSequence.addAll(displayedValues);
             }
         });
-        scheduledExecutorService.shutdown();
     }
 }

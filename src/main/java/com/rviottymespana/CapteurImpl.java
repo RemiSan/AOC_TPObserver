@@ -1,6 +1,9 @@
 package com.rviottymespana;
 
+import com.rviottymespana.models.StampedValue;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
@@ -34,9 +37,9 @@ public class CapteurImpl implements Capteur{
     }
 
     @Override
-    public Integer getValue(ObserverDeCapteurAsync observerDeCapteurAsync) {
+    public StampedValue getValue(ObserverDeCapteurAsync observerDeCapteurAsync) {
         algo.valueRead(this);
-        return value;
+        return new StampedValue(value, System.currentTimeMillis());
     }
 
     @Override
