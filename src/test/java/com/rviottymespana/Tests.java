@@ -22,6 +22,7 @@ public class Tests {
     private static MemoryAppender memoryAppender;
     private Capteur capteur;
     private List<Afficheur> afficheurList;
+    private ScheduledExecutorService scheduledExecutorService;
 
     @Before
     public void setupFourAfficheurOnOneCapteur() {
@@ -31,7 +32,7 @@ public class Tests {
         logger.setLevel(Level.INFO);
         logger.addAppender(memoryAppender);
         memoryAppender.start();
-        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(8);
+        scheduledExecutorService = Executors.newScheduledThreadPool(8);
         afficheurList = Arrays.asList(new Afficheur(1),
                                         new Afficheur(2),
                                         new Afficheur(3),
@@ -52,6 +53,7 @@ public class Tests {
                 assertThat(CapteurUtils.calculateNextValue(displayedValues.get(i))).isEqualTo(displayedValues.get(i + 1));
             }
         });
+        scheduledExecutorService.shutdown();
     }
 
     @Test
@@ -65,6 +67,7 @@ public class Tests {
                 assertThat(CapteurUtils.isBefore(displayedValues.get(i), displayedValues.get(i + 1))).isTrue();
             }
         });
+        scheduledExecutorService.shutdown();
     }
 
     @Test
@@ -89,10 +92,11 @@ public class Tests {
                 assertThat(biggestSequence).containsSubsequence(displayedValues);
             }
             else{
-                assertThat(biggestSequence).containsSubsequence(displayedValues);
+                assertThat(displayedValues).containsSubsequence(biggestSequence);
                 biggestSequence.clear();
                 biggestSequence.addAll(displayedValues);
             }
         });
+        scheduledExecutorService.shutdown();
     }
 }
