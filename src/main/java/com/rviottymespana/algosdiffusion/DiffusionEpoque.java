@@ -1,14 +1,15 @@
 package com.rviottymespana.algosdiffusion;
 
+import com.rviottymespana.Capteur;
 import com.rviottymespana.CapteurImpl;
 import com.rviottymespana.ObserverDeCapteurAsync;
 
 public class DiffusionEpoque implements AlgoDiffusion {
 
-    CapteurImpl capteur;
+    Capteur capteur;
 
     @Override
-    public void configure(CapteurImpl capteur) {
+    public void configure(Capteur capteur) {
         this.capteur = capteur;
     }
 
@@ -20,5 +21,5 @@ public class DiffusionEpoque implements AlgoDiffusion {
     }
 
     @Override
-    public void valueRead(CapteurImpl capteur) { }
+    public void valueRead(ObserverDeCapteurAsync observerDeCapteurAsync) { }
 }

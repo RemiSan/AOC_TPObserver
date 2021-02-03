@@ -18,6 +18,6 @@ public class GetValue implements Callable<StampedValue> {
 
     @Override
     public StampedValue call() {
-        return this.capteur.getValue(this.observerDeCapteurAsync);
+        return this.capteur.getValue(observerDeCapteurAsync);
     }
 }

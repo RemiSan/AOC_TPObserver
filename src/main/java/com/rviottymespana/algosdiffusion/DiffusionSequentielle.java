@@ -1,27 +1,26 @@
 package com.rviottymespana.algosdiffusion;
 
 import com.rviottymespana.Capteur;
-import com.rviottymespana.CapteurImpl;
 import com.rviottymespana.ObserverDeCapteurAsync;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class DiffusionSequentielle implements AlgoDiffusion{
 
-    CapteurImpl capteur;
-    Integer canalDone;
+    Capteur capteur;
+    Set<ObserverDeCapteurAsync> observersDone = new HashSet<>();
     boolean reading = false;
 
-    public DiffusionSequentielle() {
-    }
-
     @Override
-    public void configure(CapteurImpl capteur) {
+    public void configure(Capteur capteur) {
         this.capteur = capteur;
     }
 
     @Override
     public void execute() {
         if (!reading) {
-            canalDone = 0;
+            observersDone.clear();
             reading = true;
             Capteur clone = capteur.clone();
             for (ObserverDeCapteurAsync canal : capteur.getObserverDeCapteurs()) {
@@ -31,9 +30,9 @@ public class DiffusionSequentielle implements AlgoDiffusion{
     }
 
     @Override
-    public void valueRead(CapteurImpl capteur) {
-        canalDone++;
-        if (canalDone == capteur.getObserverDeCapteurs().size()) {
+    public void valueRead(ObserverDeCapteurAsync observerDeCapteurAsync) {
+        observersDone.add(observerDeCapteurAsync);
+        if (observersDone.containsAll(capteur.getObserverDeCapteurs())) {
             reading = false;
         }
     }

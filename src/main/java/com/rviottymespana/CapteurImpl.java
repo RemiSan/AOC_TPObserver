@@ -32,13 +32,14 @@ public class CapteurImpl implements Capteur{
         this.executor.scheduleAtFixedRate(repeatedTask, 1000L, 1000L, TimeUnit.MILLISECONDS);
     }
 
+    @Override
     public List<ObserverDeCapteurAsync> getObserverDeCapteurs(){
         return observerDeCapteurAsyncList;
     }
 
     @Override
     public StampedValue getValue(ObserverDeCapteurAsync observerDeCapteurAsync) {
-        algo.valueRead(this);
+        algo.valueRead(observerDeCapteurAsync);
         return new StampedValue(value, System.currentTimeMillis());
     }
 
@@ -70,11 +71,6 @@ public class CapteurImpl implements Capteur{
     @Override
     public void attach(ObserverDeCapteurAsync o) {
         observerDeCapteurAsyncList.add(o);
-    }
-
-    @Override
-    public void detach(ObserverDeCapteurAsync o) {
-        observerDeCapteurAsyncList.remove(o);
     }
 
     @Override
