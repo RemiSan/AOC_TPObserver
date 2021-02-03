@@ -1,4 +1,6 @@
-package com.rviottymespana;
+package com.rviottymespana.algosdiffusion;
+
+import com.rviottymespana.CapteurImpl;
 
 public interface AlgoDiffusion{
     void configure(CapteurImpl capteur);

@@ -1,5 +1,7 @@
 package com.rviottymespana;
 
+import com.rviottymespana.methodinvocations.GetValue;
+import com.rviottymespana.methodinvocations.Update;
 import com.rviottymespana.models.StampedValue;
 
 import java.util.concurrent.Future;

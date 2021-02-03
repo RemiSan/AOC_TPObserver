@@ -1,4 +1,7 @@
-package com.rviottymespana;
+package com.rviottymespana.methodinvocations;
+
+import com.rviottymespana.CapteurAsync;
+import com.rviottymespana.ObserverDeCapteur;
 
 import java.util.concurrent.Callable;
 

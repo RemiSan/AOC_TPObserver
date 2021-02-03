@@ -1,9 +1,9 @@
 package com.rviottymespana;
 
+import com.rviottymespana.algosdiffusion.AlgoDiffusion;
 import com.rviottymespana.models.StampedValue;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;

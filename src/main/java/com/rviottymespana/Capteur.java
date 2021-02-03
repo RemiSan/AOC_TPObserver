@@ -1,5 +1,6 @@
 package com.rviottymespana;
 
+import com.rviottymespana.algosdiffusion.AlgoDiffusion;
 import com.rviottymespana.models.StampedValue;
 
 public interface Capteur extends Cloneable{

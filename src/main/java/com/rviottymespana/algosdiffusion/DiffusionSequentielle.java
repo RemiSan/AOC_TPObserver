@@ -1,4 +1,8 @@
-package com.rviottymespana;
+package com.rviottymespana.algosdiffusion;
+
+import com.rviottymespana.Capteur;
+import com.rviottymespana.CapteurImpl;
+import com.rviottymespana.ObserverDeCapteurAsync;
 
 public class DiffusionSequentielle implements AlgoDiffusion{
 

@@ -1,4 +1,7 @@
-package com.rviottymespana;
+package com.rviottymespana.algosdiffusion;
+
+import com.rviottymespana.CapteurImpl;
+import com.rviottymespana.ObserverDeCapteurAsync;
 
 public class DiffusionEpoque implements AlgoDiffusion {
 
