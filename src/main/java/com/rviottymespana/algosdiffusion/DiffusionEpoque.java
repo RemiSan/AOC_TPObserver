@@ -10,7 +10,7 @@ import com.rviottymespana.ObserverDeCapteurAsync;
  */
 public class DiffusionEpoque implements AlgoDiffusion {
 
-    Capteur capteur;
+    private Capteur capteur;
 
     @Override
     public void configure(Capteur capteur) {

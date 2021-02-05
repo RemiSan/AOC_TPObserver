@@ -14,9 +14,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class Canal implements ObserverDeCapteurAsync, CapteurAsync{
 
-    ScheduledExecutorService scheduler;
-    ObserverDeCapteur afficheur;
-    Capteur subject;
+    private final ScheduledExecutorService scheduler;
+    private final ObserverDeCapteur afficheur;
+    private Capteur subject;
 
     public Canal(ScheduledExecutorService scheduler, Afficheur afficheur) {
         this.scheduler = scheduler;

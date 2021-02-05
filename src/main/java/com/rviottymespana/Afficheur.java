@@ -6,10 +6,12 @@ import com.rviottymespana.models.StampedValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Classe représentant un afficheur de l'application
+ */
 public class Afficheur implements ObserverDeCapteur {
 
     private static final Logger logger = LoggerFactory.getLogger(Afficheur.class);
-
     private final Integer indexAfficheur;
 
     /**

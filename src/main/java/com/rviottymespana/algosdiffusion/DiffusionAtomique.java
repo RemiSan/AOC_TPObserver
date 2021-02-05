@@ -12,12 +12,10 @@ import java.util.Set;
  */
 public class DiffusionAtomique implements AlgoDiffusion{
 
-    Capteur capteur;
+    private Capteur capteur;
 
-    /**
-     * Ensemble représentant les observers ayant lu la valeur après la dernière phase d'écriture
-     */
-    Set<ObserverDeCapteurAsync> observersDone = new HashSet<>();
+    // Ensemble représentant les observers ayant lu la valeur après la dernière phase d'écriture
+    private Set<ObserverDeCapteurAsync> observersDone = new HashSet<>();
 
     @Override
     public void configure(Capteur capteur) {

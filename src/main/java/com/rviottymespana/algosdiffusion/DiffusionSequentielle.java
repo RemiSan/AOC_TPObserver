@@ -6,11 +6,17 @@ import com.rviottymespana.ObserverDeCapteurAsync;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Classe représentant l'algorithme de diffusion séquentielle
+ * Il s'agit d'une Concrete Strategy dans le patron de conception Strategy
+ */
 public class DiffusionSequentielle implements AlgoDiffusion{
 
-    Capteur capteur;
-    Set<ObserverDeCapteurAsync> observersDone = new HashSet<>();
-    boolean reading = false;
+    private Capteur capteur;
+
+    // Ensemble représentant les observers ayant lu la valeur après la dernière phase d'écriture
+    private Set<ObserverDeCapteurAsync> observersDone = new HashSet<>();
+    private boolean reading = false;
 
     @Override
     public void configure(Capteur capteur) {

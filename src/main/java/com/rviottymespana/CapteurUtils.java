@@ -1,5 +1,9 @@
 package com.rviottymespana;
 
+/**
+ * Classe utilitaire de l'application permettant d'obtenir des informations sur les valeurs
+ * des capteurs
+ */
 public class CapteurUtils {
 
     /**

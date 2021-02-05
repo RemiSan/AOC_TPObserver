@@ -11,8 +11,8 @@ import java.util.concurrent.Callable;
  */
 public class GetValue implements Callable<StampedValue> {
 
-    private Capteur capteur;
-    private ObserverDeCapteurAsync observerDeCapteurAsync;
+    private final Capteur capteur;
+    private final ObserverDeCapteurAsync observerDeCapteurAsync;
 
     public GetValue(Capteur capteur, ObserverDeCapteurAsync observerDeCapteurAsync) {
         this.capteur = capteur;
