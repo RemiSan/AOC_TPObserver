@@ -8,6 +8,10 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Canal représentant un proxy entre le capteur (qui en sera le client) et l'afficheur (qui en sera le component)
+ * et qui représente aussi un proxy entre l'afficheur (qui en sera le client) et le capteur (qui en sera le component)
+ */
 public class Canal implements ObserverDeCapteurAsync, CapteurAsync{
 
     ScheduledExecutorService scheduler;

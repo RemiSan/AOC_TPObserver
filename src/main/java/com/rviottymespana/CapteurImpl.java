@@ -16,7 +16,14 @@ public class CapteurImpl implements Capteur{
     private AlgoDiffusion algo;
     private Integer value;
     private final List<ObserverDeCapteurAsync> observerDeCapteurAsyncList = new ArrayList<ObserverDeCapteurAsync>();
+
+    // Executor permettant d'appeler tick en boucle à un délai fixe
     private final ScheduledExecutorService executor;
+
+    /**
+     *  Verrou permettant de sauter l'incrémentation de value à l'appel de tick
+     *  permet donc d'interdire l'écriture pour la diffusion atomique
+     */
     private boolean locked;
 
     public CapteurImpl() {

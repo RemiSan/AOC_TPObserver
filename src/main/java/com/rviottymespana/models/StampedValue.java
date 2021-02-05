@@ -1,7 +1,7 @@
 package com.rviottymespana.models;
 
 /**
- * Classe représentant une valeur estampillée
+ * Modèle représentant une valeur estampillée
  */
 public class StampedValue {
 

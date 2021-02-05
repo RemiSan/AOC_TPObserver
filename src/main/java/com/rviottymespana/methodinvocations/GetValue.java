@@ -6,6 +6,9 @@ import com.rviottymespana.models.StampedValue;
 
 import java.util.concurrent.Callable;
 
+/**
+ * Concrete method invocation : permet de faire un getValue() sur le capteur
+ */
 public class GetValue implements Callable<StampedValue> {
 
     private Capteur capteur;

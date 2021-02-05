@@ -6,6 +6,7 @@ import com.rviottymespana.ObserverDeCapteurAsync;
 
 /**
  * Interface publique représentant un algorithme de diffusion générique
+ * Il s'agit d'une Strategy dans le patron de conception Strategy
  */
 public interface AlgoDiffusion{
 

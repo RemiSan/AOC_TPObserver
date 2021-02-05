@@ -12,6 +12,10 @@ public class Afficheur implements ObserverDeCapteur {
 
     private final Integer indexAfficheur;
 
+    /**
+     * Stockage de l'estampille de la dernière valeur affichée (utile seulement dans le cadre de la gestion
+     * par époque)
+     */
     private long lastTimeStamp;
 
     public Afficheur(Integer indexAfficheur) {
@@ -23,7 +27,7 @@ public class Afficheur implements ObserverDeCapteur {
     public void update(CapteurAsync subject) {
         try {
             StampedValue stampedValue = subject.getValue().get();
-            // vérification utile pour l'algorithme de gestion par époque
+            // vérification utile seulement pour l'algorithme de gestion par époque
             if (stampedValue.getTimestamp() > lastTimeStamp) {
                 lastTimeStamp = stampedValue.getTimestamp();
                 logger.info("Afficheur {} : Valeur reçue {}", indexAfficheur, stampedValue.getValue());

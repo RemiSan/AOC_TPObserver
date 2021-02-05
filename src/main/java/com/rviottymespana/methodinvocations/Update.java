@@ -5,6 +5,9 @@ import com.rviottymespana.ObserverDeCapteur;
 
 import java.util.concurrent.Callable;
 
+/**
+ * Concrete method invocation : permet de faire un update() sur l'afficheur
+ */
 public class Update implements Callable<Void> {
 
     ObserverDeCapteur afficheur;

@@ -9,6 +9,11 @@ import java.util.stream.Collectors;
 
 public class MemoryAppender extends ListAppender<ILoggingEvent> {
 
+    /**
+     * Permet d'obtenir la liste des valeur loggées par un afficheur
+     * @param index Index de l'afficheur dont on veut la liste
+     * @return Liste des valeurs loggées par l'afficheur
+     */
     public List<Integer> getListOfValuesDisplayedByAfficheurIndex(Integer index){
         return this.list.stream()
                 .filter(iLoggingEvent -> iLoggingEvent.getFormattedMessage().startsWith("Afficheur " + index + " "))

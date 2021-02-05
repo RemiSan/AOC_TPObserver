@@ -22,6 +22,11 @@ public class DiffusionSequentielle implements AlgoDiffusion{
         if (!reading) {
             observersDone.clear();
             reading = true;
+
+            /**
+             * on copie l'original dans la variable clone et les getValue() retourne la valeur du clone
+             * pendant le que le capteur original continue d'incrémenter sa valeur
+             */
             Capteur clone = capteur.clone();
             for (ObserverDeCapteurAsync canal : capteur.getObserverDeCapteurs()) {
                 canal.update(clone);
