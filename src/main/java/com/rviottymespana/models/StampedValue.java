@@ -1,8 +1,14 @@
 package com.rviottymespana.models;
 
+/**
+ * Classe représentant une valeur estampillée
+ */
 public class StampedValue {
 
+    // Valeur
     Integer value;
+
+    // Estampille correspondant à la date de captation de la valeur
     long timestamp;
 
     public StampedValue(Integer value, long timestamp) {

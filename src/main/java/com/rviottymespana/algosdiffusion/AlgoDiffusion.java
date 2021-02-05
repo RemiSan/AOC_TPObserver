@@ -4,6 +4,9 @@ import com.rviottymespana.Canal;
 import com.rviottymespana.Capteur;
 import com.rviottymespana.ObserverDeCapteurAsync;
 
+/**
+ * Interface publique représentant un algorithme de diffusion générique
+ */
 public interface AlgoDiffusion{
 
     /**

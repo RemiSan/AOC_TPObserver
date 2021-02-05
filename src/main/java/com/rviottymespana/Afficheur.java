@@ -23,6 +23,7 @@ public class Afficheur implements ObserverDeCapteur {
     public void update(CapteurAsync subject) {
         try {
             StampedValue stampedValue = subject.getValue().get();
+            // vérification utile pour l'algorithme de gestion par époque
             if (stampedValue.getTimestamp() > lastTimeStamp) {
                 lastTimeStamp = stampedValue.getTimestamp();
                 logger.info("Afficheur {} : Valeur reçue {}", indexAfficheur, stampedValue.getValue());

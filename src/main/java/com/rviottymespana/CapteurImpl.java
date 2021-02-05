@@ -19,16 +19,15 @@ public class CapteurImpl implements Capteur{
     private final ScheduledExecutorService executor;
     private boolean locked;
 
-    private final TimerTask repeatedTask = new TimerTask() {
-        public void run() {
-            tick();
-        }
-    };
-
     public CapteurImpl() {
         this.value = 0;
         this.executor = Executors.newSingleThreadScheduledExecutor();
         this.locked = false;
+        TimerTask repeatedTask = new TimerTask() {
+            public void run() {
+                tick();
+            }
+        };
         this.executor.scheduleAtFixedRate(repeatedTask, 1000L, 1000L, TimeUnit.MILLISECONDS);
     }
 
