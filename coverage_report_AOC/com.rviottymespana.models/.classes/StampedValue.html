@@ -1,0 +1,109 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: StampedValue</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.rviottymespana.models</a> ]
+</div>
+
+<h1>Coverage Summary for Class: StampedValue (com.rviottymespana.models)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StampedValue</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.rviottymespana.models;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;/**
+<i>4</i>&nbsp; * Classe représentant une valeur estampillée
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;public class StampedValue {
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;    // Valeur
+<i>9</i>&nbsp;    Integer value;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    // Estampille correspondant à la date de captation de la valeur
+<i>12</i>&nbsp;    long timestamp;
+<i>13</i>&nbsp;
+<b class="fc"><i>14</i>&nbsp;    public StampedValue(Integer value, long timestamp) {</b>
+<b class="fc"><i>15</i>&nbsp;        this.value = value;</b>
+<b class="fc"><i>16</i>&nbsp;        this.timestamp = timestamp;</b>
+<b class="fc"><i>17</i>&nbsp;    }</b>
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    public Integer getValue() {
+<b class="fc"><i>20</i>&nbsp;        return value;</b>
+<i>21</i>&nbsp;    }
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    public long getTimestamp() {
+<b class="fc"><i>24</i>&nbsp;        return timestamp;</b>
+<i>25</i>&nbsp;    }
+<i>26</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-02-05 11:06</div>
+</div>
+</body>
+</html>

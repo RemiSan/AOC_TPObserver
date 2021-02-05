@@ -1,0 +1,106 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Capteur</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.rviottymespana</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Capteur (com.rviottymespana)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Capteur</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.rviottymespana;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.rviottymespana.algosdiffusion.AlgoDiffusion;
+<i>4</i>&nbsp;import com.rviottymespana.models.StampedValue;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.util.List;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;/**
+<i>9</i>&nbsp; * Interface publique représentant un capteur
+<i>10</i>&nbsp; */
+<i>11</i>&nbsp;public interface Capteur extends Cloneable{
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;    /**
+<i>14</i>&nbsp;     * @return la liste des observers du capteur
+<i>15</i>&nbsp;     */
+<i>16</i>&nbsp;    List&lt;ObserverDeCapteurAsync&gt; getObserverDeCapteurs();
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    /**
+<i>19</i>&nbsp;     * Permet d&#39;obtenir la valeur actuelle du Capteur
+<i>20</i>&nbsp;     * @param observerDeCapteurAsync Observer par lequel la demande de lecture est parvenue au capteur
+<i>21</i>&nbsp;     * @return valeur actuelle du Capteur estampillée
+<i>22</i>&nbsp;     */
+<i>23</i>&nbsp;    StampedValue getValue(ObserverDeCapteurAsync observerDeCapteurAsync);
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    /**
+<i>26</i>&nbsp;     * Permet de mettre en place l&#39;algorithme de diffusion à ultiliser pour la diffusion des valeurs
+<i>27</i>&nbsp;     * du capteur
+<i>28</i>&nbsp;     * @param algoDiffusion Algorithme de diffusion à utiliser
+<i>29</i>&nbsp;     */
+<i>30</i>&nbsp;    void configure(AlgoDiffusion algoDiffusion);
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    /**
+<i>33</i>&nbsp;     * Permet d&#39;incrémenter de la valeur du capteur
+<i>34</i>&nbsp;     */
+<i>35</i>&nbsp;    void tick();
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    /**
+<i>38</i>&nbsp;     * Permet de verrouiller le capteur, lorsque le capteur est verrouillé, sa valeur ne
+<i>39</i>&nbsp;     * peut plus être incrémentée (via tick())
+<i>40</i>&nbsp;     */
+<i>41</i>&nbsp;    void lock();
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    /**
+<i>44</i>&nbsp;     * Permet de déverrouiller le capteur, sa valeur pourra alors être incrémentée à nouveau (via tick())
+<i>45</i>&nbsp;     */
+<i>46</i>&nbsp;    void unlock();
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    /**
+<i>49</i>&nbsp;     * Permet d&#39;attacher un observer au capteur
+<i>50</i>&nbsp;     * @param observerDeCapteurAsync Observer à attacher au capteur
+<i>51</i>&nbsp;     */
+<i>52</i>&nbsp;    void attach(ObserverDeCapteurAsync observerDeCapteurAsync);
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    /**
+<i>55</i>&nbsp;     * Permet de cloner le capteur
+<i>56</i>&nbsp;     * @return clone du capteur
+<i>57</i>&nbsp;     */
+<i>58</i>&nbsp;    Capteur clone();
+<i>59</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-02-05 11:06</div>
+</div>
+</body>
+</html>

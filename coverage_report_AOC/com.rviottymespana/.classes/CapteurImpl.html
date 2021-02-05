@@ -1,0 +1,193 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CapteurImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.rviottymespana</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CapteurImpl (com.rviottymespana)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CapteurImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    89,3%
+  </span>
+  <span class="absValue">
+    (25/ 28)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CapteurImpl$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/ 11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90,3%
+  </span>
+  <span class="absValue">
+    (28/ 31)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.rviottymespana;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.rviottymespana.algosdiffusion.AlgoDiffusion;
+<i>4</i>&nbsp;import com.rviottymespana.models.StampedValue;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.util.ArrayList;
+<i>7</i>&nbsp;import java.util.List;
+<i>8</i>&nbsp;import java.util.TimerTask;
+<i>9</i>&nbsp;import java.util.concurrent.Executors;
+<i>10</i>&nbsp;import java.util.concurrent.ScheduledExecutorService;
+<i>11</i>&nbsp;import java.util.concurrent.TimeUnit;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;public class CapteurImpl implements Capteur{
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    private AlgoDiffusion algo;
+<i>17</i>&nbsp;    private Integer value;
+<b class="fc"><i>18</i>&nbsp;    private final List&lt;ObserverDeCapteurAsync&gt; observerDeCapteurAsyncList = new ArrayList&lt;ObserverDeCapteurAsync&gt;();</b>
+<i>19</i>&nbsp;    private final ScheduledExecutorService executor;
+<i>20</i>&nbsp;    private boolean locked;
+<i>21</i>&nbsp;
+<b class="fc"><i>22</i>&nbsp;    public CapteurImpl() {</b>
+<b class="fc"><i>23</i>&nbsp;        this.value = 0;</b>
+<b class="fc"><i>24</i>&nbsp;        this.executor = Executors.newSingleThreadScheduledExecutor();</b>
+<b class="fc"><i>25</i>&nbsp;        this.locked = false;</b>
+<b class="fc"><i>26</i>&nbsp;        TimerTask repeatedTask = new TimerTask() {</b>
+<i>27</i>&nbsp;            public void run() {
+<b class="fc"><i>28</i>&nbsp;                tick();</b>
+<b class="fc"><i>29</i>&nbsp;            }</b>
+<i>30</i>&nbsp;        };
+<b class="fc"><i>31</i>&nbsp;        this.executor.scheduleAtFixedRate(repeatedTask, 1000L, 1000L, TimeUnit.MILLISECONDS);</b>
+<b class="fc"><i>32</i>&nbsp;    }</b>
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    @Override
+<i>35</i>&nbsp;    public List&lt;ObserverDeCapteurAsync&gt; getObserverDeCapteurs(){
+<b class="fc"><i>36</i>&nbsp;        return observerDeCapteurAsyncList;</b>
+<i>37</i>&nbsp;    }
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    @Override
+<i>40</i>&nbsp;    public StampedValue getValue(ObserverDeCapteurAsync observerDeCapteurAsync) {
+<b class="fc"><i>41</i>&nbsp;        algo.valueRead(observerDeCapteurAsync);</b>
+<b class="fc"><i>42</i>&nbsp;        return new StampedValue(value, System.currentTimeMillis());</b>
+<i>43</i>&nbsp;    }
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    @Override
+<i>46</i>&nbsp;    public void configure(AlgoDiffusion algoDiffusion) {
+<b class="fc"><i>47</i>&nbsp;        this.algo = algoDiffusion;</b>
+<b class="fc"><i>48</i>&nbsp;        this.algo.configure(this);</b>
+<b class="fc"><i>49</i>&nbsp;    }</b>
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    @Override
+<i>52</i>&nbsp;    public void tick() {
+<b class="fc"><i>53</i>&nbsp;        if (!locked) {</b>
+<b class="fc"><i>54</i>&nbsp;            value = CapteurUtils.calculateNextValue(value);</b>
+<b class="fc"><i>55</i>&nbsp;            algo.execute();</b>
+<i>56</i>&nbsp;        }
+<b class="fc"><i>57</i>&nbsp;    }</b>
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;    @Override
+<i>60</i>&nbsp;    public void lock() {
+<b class="fc"><i>61</i>&nbsp;        this.locked = true;</b>
+<b class="fc"><i>62</i>&nbsp;    }</b>
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    @Override
+<i>66</i>&nbsp;    public void unlock() {
+<b class="fc"><i>67</i>&nbsp;        this.locked = false;</b>
+<b class="fc"><i>68</i>&nbsp;    }</b>
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    @Override
+<i>71</i>&nbsp;    public void attach(ObserverDeCapteurAsync o) {
+<b class="fc"><i>72</i>&nbsp;        observerDeCapteurAsyncList.add(o);</b>
+<b class="fc"><i>73</i>&nbsp;    }</b>
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    @Override
+<i>76</i>&nbsp;    public Capteur clone() {
+<i>77</i>&nbsp;        try {
+<b class="fc"><i>78</i>&nbsp;            return (Capteur) super.clone();</b>
+<b class="nc"><i>79</i>&nbsp;        } catch (CloneNotSupportedException e) {</b>
+<b class="nc"><i>80</i>&nbsp;            e.printStackTrace();</b>
+<i>81</i>&nbsp;        }
+<b class="nc"><i>82</i>&nbsp;        return null;</b>
+<i>83</i>&nbsp;    }
+<i>84</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-02-05 11:06</div>
+</div>
+</body>
+</html>
